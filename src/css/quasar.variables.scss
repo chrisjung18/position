@@ -12,14 +12,26 @@
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
-$primary   : #1976D2;
-$secondary : #26A69A;
-$accent    : #9C27B0;
+/*$primary   : #FF6F61; // coral red (energy)
+$secondary : #6C5CE7; // purple (creativity)
+$accent    : #00B894; // fresh green (action)
 
-$dark      : #1D1D1D;
-$dark-page : #121212;
+$dark      : #1A1A1A;
+$dark-page : #0F0F0F;
 
-$positive  : #21BA45;
-$negative  : #C10015;
-$info      : #31CCEC;
-$warning   : #F2C037;
+$positive  : #00C853;
+$negative  : #D63031;
+$info      : #0984E3;
+$warning   : #FDCB6E;*/
+
+$primary   : #FF2E63; // neon pink (CTA, tickets)
+$secondary : #08D9D6; // neon cyan
+$accent    : #F9A826; // warm highlight (tickets / badges)
+
+$dark      : #0B0F1A;
+$dark-page : #05070D;
+
+$positive  : #00E676;
+$negative  : #FF1744;
+$info      : #29B6F6;
+$warning   : #FFB300;

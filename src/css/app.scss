@@ -1,1 +1,15 @@
-// app global css
+@import "fonts/Poppins.css";
+@import "fonts/Roboto.css";
+@import "fonts/Monserrat.css";
+@import "./variables.scss";
+
+*{
+  font-family: Roboto;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.page-padding{
+  padding: 2rem;
+}

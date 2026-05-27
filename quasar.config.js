@@ -12,7 +12,10 @@ export default defineConfig((ctx) => {
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-webpack/boot-files
     boot: [
-      'i18n'
+      'i18n',
+      'axios',
+      'supabase',
+      'auth'
     ],
 
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-file#css
@@ -22,12 +25,12 @@ export default defineConfig((ctx) => {
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
     extras: [
-      // 'ionicons-v4',
-      // 'mdi-v7',
-      // 'fontawesome-v6',
-      // 'eva-icons',
-      // 'themify',
-      // 'line-awesome',
+      'ionicons-v4',
+      'mdi-v7',
+      'fontawesome-v6',
+      'eva-icons',
+      'themify',
+      'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
       'roboto-font', // optional, you are not bound to it
@@ -36,8 +39,12 @@ export default defineConfig((ctx) => {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-file#build
     build: {
+      env: {
+        SUPABASE_URL: 'https://vkgpzudnhiaknuwenxhy.supabase.co',
+        SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZrZ3B6dWRuaGlha251d2VueGh5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2ODkxMDEsImV4cCI6MjA5NTI2NTEwMX0.mUa355GDpP6JFI98SGrXRgZbIfCeijajovuzQN_z3YQ'
+      },
       // publicPath: '/',
-      vueRouterMode: 'hash', // available values: 'hash', 'history'
+      vueRouterMode: 'history', // available values: 'hash', 'history'
 
       // webpackTranspile: false,
 
@@ -87,12 +94,17 @@ export default defineConfig((ctx) => {
       // directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Dialog',
+        'Notify',
+        'AddressbarColor',
+        'LoadingBar'
+      ]
     },
 
     // animations: 'all', // --- includes all animations
     // https://quasar.dev/options/animations
-    animations: [],
+    animations: 'all',
 
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-file#sourcefiles
     // sourceFiles: {

@@ -1,43 +1,9 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
+    <q-header elevated class="q-px-md flex flex-center justify-between">
+      <span class="text-white text-bold">{{ userStore.currentUser?.email }}</span>
+      <q-btn dense flat icon="eva-log-out" @click.stop="logout" />
     </q-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
-
-        <EssentialLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
 
     <q-page-container>
       <router-view />
@@ -46,57 +12,44 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+import { onMounted, watch } from 'vue'
+import { supabase } from 'src/boot/supabase'
+import { useUserStore } from 'src/stores/userStore'
+import { useRedirect } from 'src/composables/useRedirect';
+import { useRouter } from 'vue-router';
 
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+const userStore = useUserStore()
+const router = useRouter()
+const { redirect } = useRedirect()
+
+watch(
+  () => userStore.isConnected,
+  (connected) => {
+    if (
+      !connected &&
+      router.currentRoute.value.meta?.requireAuth === true
+    ) {
+      router.replace({ name: 'login' })
+    }
   },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
+  { immediate: true }
+)
+
+const logout = async () => {
+  const { error } = await supabase.auth.signOut()
+
+  if (error) {
+    console.error(error.message)
+    return
   }
-]
 
-const leftDrawerOpen = ref(false)
-
-function toggleLeftDrawer () {
-  leftDrawerOpen.value = !leftDrawerOpen.value
+  userStore.clearUser?.() // if you have it
+  router.push({ name: 'login' })
 }
 </script>
+
+<style lang="scss" scoped>
+.q-page-container{
+
+}
+</style>

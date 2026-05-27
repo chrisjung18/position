@@ -1,9 +1,17 @@
 <template>
   <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    >
+
   </q-page>
 </template>
+
+<script setup>
+import {useRedirect} from 'src/composables/useRedirect.js';
+import { onMounted } from 'vue';
+
+const {redirect} = useRedirect()
+
+onMounted(() => {
+
+})
+
+</script>

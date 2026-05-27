@@ -1,0 +1,22 @@
+:root {
+  --q-primary   : #FF2E63; 
+  --q-secondary : #08D9D6; 
+  --q-accent    : #F9A826;
+
+  --q-dark      : #0B0F1A;
+  --q-dark-page : #05070D;
+
+  --q-positive  : #00E676;
+  --q-negative  : #FF1744;
+  --q-info      : #29B6F6;
+  --q-warning   : #FFB300;
+
+  --q-primary-rgb: 255, 46, 99;
+  --q-dark-page-rgb: 5, 7, 13;
+}
+
+
+// Use $primary → CTA buttons (Create Event, Buy Ticket)
+// Use $accent → highlights (price, featured, badges)
+// Use $secondary → links + UI structure
+// Use $warning → dates urgency (Last tickets)
