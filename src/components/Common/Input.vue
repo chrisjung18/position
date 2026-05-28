@@ -10,10 +10,9 @@
     }
     ">
     <q-icon
-      :name="hidePass ? iconToggle : icon"
+      :name="icon"
       :color="iconColor"
       :size="iconSize"
-      :class="{'cursor-pointer' : enableIconClick}"
       style="padding-left: 10px"
     />
     <q-input
@@ -35,7 +34,7 @@
       @blur="$emit('blured')"
       @click.stop="$emit('clicked')"
       :autofocus="autofocus"
-      :type="hidePass ? typeToggle : type"
+       :type="type === 'password' ? typeToggle : type"
       :placeholder="placeholder"
       :input-style="{
 
@@ -55,6 +54,13 @@
       v-if="model.length > 0"
       style="padding-right: 10px;"
       @click.stop="clearInput"
+    />
+    <q-icon
+      v-if="type === 'password'"
+      :name="hidePass ? 'eva-eye-off-outline' : 'eva-eye-outline'"
+      size="18px"
+      @click.stop="togglePass"
+      class="cursor-pointer"
     />
   </div>
 </template>
@@ -80,7 +86,6 @@ export default {
     value: { type: String },
     type: { type: String, default: "text" },
     propModel: { type: String, default: '' },
-    enableIconClick: { type: Boolean },
     clearable: { type: Boolean },
     color: { type: String },
     labelColor: { type: String },
@@ -97,8 +102,7 @@ export default {
       isFocused: false,
       model: this.propModel,
       hidePass: false,
-      typeToggle: this.type,
-      iconToggle: this.icon
+      typeToggle: this.type
     }
   },
   watch: {
@@ -113,29 +117,13 @@ export default {
     }
   },
   methods: {
-    iconClick(inputType){
-      if(inputType === "password"){
-        this.$refs.inputField.focus()
-        this.hidePass = !this.hidePass
-        if(this.hidePass){
-          this.typeToggle = "text"
-          this.iconToggle = "eva-eye-off-outline"
-        }
-        else{
-          this.typeToggle = "password"
-          this.iconToggle = "eva-eye-outline"
-        }
-      }
-      else this.$emit("onIconClick")
-    },
     clearInput(){
       this.model = ""
       this.$refs.inputField.focus()
     },
     togglePass(){
-      this.hide = !this.hide
-      if(this.hide) this.$emit("hidePass", true)
-      else this.$emit("hidePass", false)
+      this.hidePass = !this.hidePass
+      this.typeToggle = this.hidePass ? 'text' : 'password'
     },
     update(value){
       this.model = value

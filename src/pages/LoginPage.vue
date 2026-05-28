@@ -1,8 +1,8 @@
 <template>
   <q-page class="page-padding text-white flex justify-center column">
-    <div class="logo-title q-mb-lg">
-      <div class="logo full-width q-mb-md flex justify-center align-center">
-        <q-img src="cal_logo.png"/>
+    <div class="logo-title flex justify-center q-mb-lg">
+      <div class="logo q-mb-md flex">
+        <img src="cal_logo.png"/>
       </div>
       <div class="title full-width q-mb-lg flex justify-center">
         <span class="text-capitalize text-white text-h5 text-bold">log in</span>
@@ -18,7 +18,7 @@
               placeholder="Email "
               @clearInput="clearEmail"
               show-icon
-              height="3rem"
+              height="2.8rem"
               icon="eva-email-outline"
               icon-color="primary"
               width="100%"
@@ -35,7 +35,7 @@
               icon="eva-lock-outline"
               icon-color="primary"
               width="100%"
-              height="3rem"
+              height="2.8rem"
               show-icon
               class="q-mb-sm"
               type="password"
@@ -45,7 +45,7 @@
             />
             <div class="forgot_pass flex justify-end">
               <span
-                class="text-capitalize text-secondary q-mt-sm text-bold cursor-pointer"
+                class="text-capitalize text-info q-mt-sm cursor-pointer"
                 @click.stop="redirect('')"
               >
                 forgot password?
@@ -56,7 +56,7 @@
               flat
               dense
               W="100%"
-              H="3.3rem"
+              H="2.8rem"
               btn-pad="10px 0"
               name-color="white"
               radius="30px"
@@ -64,9 +64,9 @@
               background="var(--q-primary)"
               class="q-my-lg"
             />
-            <div class="propose-signup full-width text-center">
+            <div class="propose-signup full-width text-center q-mt-xl">
               <span>Don't have an account?
-                <span class="signup text-primary text-bold cursor-pointer text-h6 q-ml-sm" @click.stop="redirect('register')">
+                <span class="login text-primary text-bold cursor-pointer text-subtitle1 q-ml-sm" @click.stop="redirect('register')">
                   Sign up
                 </span>
               </span>
@@ -75,10 +75,10 @@
         </div>
 
         <div class="separate full-width q-my-md flex justify-center">
-          <span class="or-text text-bold text-h6">OR</span>
+          <span class="or-text text-bold text-subtitle1">OR</span>
         </div>
 
-        <div class="btn-section">
+        <div class="btn-section q-mt-sm">
           <Button
             bname="log in with google"
             flat
@@ -87,7 +87,7 @@
             icon-name="eva-google"
             icon-margin="0 10px 0 0"
             W="100%"
-            H="3.3rem"
+            H="3rem"
             btn-pad="10px 0"
             radius="30px"
             icon-size="22px"
@@ -156,7 +156,7 @@ const signIn = async (provider) => {
   const { error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: window.location.origin
+       redirectTo: `${window.location.origin}/auth/callback`
     }
   })
 
@@ -200,12 +200,13 @@ const signInWithEmail = async () => {
 .q-page{
   .logo-title{
     .logo{
-      height: 100px;
-      width:100px;
-      .q-img{
+      height: 7rem;
+      width:7rem;
+
+      img{
         height:100%;
-        width:40%;
-        object-fit: cover;
+        width:100%;
+        object-fit:cover;
       }
     }
   }
