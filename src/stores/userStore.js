@@ -26,7 +26,6 @@ export const useUserStore = defineStore('user-store', () => {
 
   const clearUser = value => {
     currentUser.value = null
-    window.localStorage.clear();
   }
 
   return {
