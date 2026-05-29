@@ -2,14 +2,14 @@ import { defineStore } from 'pinia';
 
 export const useUiStore = defineStore('uiStore', {
   state: () => ({
-    counter: 0,
+    isLoading: false
   }),
   getters: {
     doubleCount: (state) => state.counter * 2,
   },
   actions: {
-    increment() {
-      this.counter++;
-    },
+    setLoading(value){
+      this.isLoading = value
+    }
   },
 });

@@ -8,7 +8,7 @@
     modalW="10rem"
     headerDisplay="none"
     transShow="scale"
-    background="var(--q-search)"
+    background="var(--q-dark-page)"
     :openModal="state"
     class="modal"
   >

@@ -117,7 +117,6 @@ import { supabase } from 'src/boot/supabase';
 
 const $q = useQuasar()
 
-
 const router = useRouter()
 const {redirect} = useRedirect()
 const userStore = useUserStore()
